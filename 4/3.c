@@ -14,24 +14,20 @@ int main()
 {
     char text[SIZE];
     int i = 0;
-    int number_of_consecutive_a;
+    int j = 0;
 
     fgets(text, SIZE, stdin);
 
     while (text[i] != '\0') {
         if (text[i] == 'a') {
-            number_of_consecutive_a = 0;
-
-            for (int j = i + 1; text[j] == 'a'; j++) {
-                number_of_consecutive_a++;
+            j = i;
+            while (text[j] != '\0') {
+                text[j] = text[j + 1];
+                j++;
             }
-
-            for (int j = i + 1; text[j] != '\0'; j++) {
-                text[j - 1] = text[j + number_of_consecutive_a];
-            }
-        } else {
-            i++;
+            i--;
         }
+        i++;
     }
 
     puts(text);
