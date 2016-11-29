@@ -15,7 +15,7 @@
 #include <stdio.h>
 #define SIZE 10
 
-char* isElement(char* tab, char symbol) {
+char* isElement(char *tab, char symbol) {
     for (int i = 0; tab[i] != '\0'; i++) {
         if (tab[i] == symbol) {
             return &tab[i];
@@ -29,7 +29,7 @@ int main()
 {
     char napis[SIZE];
     char symbol = 'a';
-    char* pointer;
+    char *pointer;
 
     fgets(napis, SIZE, stdin);
 
