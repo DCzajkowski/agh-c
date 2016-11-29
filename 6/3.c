@@ -16,19 +16,13 @@
  */
 
 #include <stdio.h>
-#include <string.h>
+
 #define true 1
 #define false 0
 
 int isEqual(char *str1, char *str2)
 {
-    for (int i = 0; str1[i] != '\0'; i++) {
-        if (str1[i] != str2[i]) {
-            return false;
-        }
-    }
-
-    for (int i = 0; str2[i] != '\0'; i++) {
+    for (int i = 0; str1[i] != '\0' || str2[i] != '\0'; i++) {
         if (str1[i] != str2[i]) {
             return false;
         }
