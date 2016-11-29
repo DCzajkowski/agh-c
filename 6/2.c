@@ -12,16 +12,16 @@
 #include <stdio.h>
 #include <math.h>
 
-int f(double a, double b, double c, double &result1, double &result2)
+int f(double a, double b, double c, double *result1, double *result2)
 {
     double delta = pow(b, 2) - 4 * a * c;
     if (delta > 0) {
-        result1 = (- b - sqrt(delta)) / (2 * a);
-        result2 = (- b + sqrt(delta)) / (2 * a);
+        *result1 = (- b - sqrt(delta)) / (2 * a);
+        *result2 = (- b + sqrt(delta)) / (2 * a);
 
         return 2;
     } else if (delta == 0) {
-        result1 = (- b) / (2 * a);
+        *result1 = (- b) / (2 * a);
 
         return 1;
     }
@@ -36,7 +36,7 @@ int main()
     printf("Podaj współczynniki funkcji kwadratowej oddzielone spacją:\n");
     scanf("%lf %lf %lf", &a, &b, &c);
 
-    int results = f(a, b, c, result1, result2);
+    int results = f(a, b, c, &result1, &result2);
 
     if (results == 0) {
         printf("Brak rozwiązań równania.\n");
@@ -45,11 +45,12 @@ int main()
 
     printf("Rozwiązania tego rówanania kwadratowego to:\n");
 
+    if (results == 1) {
+        printf("%lf\n", result1);
+    }
     if (results == 2) {
         printf("%lf\n", result1);
         printf("%lf\n", result2);
-    } else if (results == 1) {
-        printf("%lf\n", result1);
     }
 
     return 0;
