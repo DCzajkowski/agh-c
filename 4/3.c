@@ -13,21 +13,16 @@
 int main()
 {
     char text[SIZE];
-    int i = 0;
-    int j = 0;
 
     fgets(text, SIZE, stdin);
 
-    while (text[i] != '\0') {
+    for (int i = 0; text[i] != '\0'; i++) {
         if (text[i] == 'a') {
-            j = i;
-            while (text[j] != '\0') {
+            for (int j = i; text[j] != '\0'; j++) {
                 text[j] = text[j + 1];
-                j++;
             }
             i--;
         }
-        i++;
     }
 
     puts(text);
