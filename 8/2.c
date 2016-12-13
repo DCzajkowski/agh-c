@@ -24,7 +24,7 @@
 
 int* add(int* tab, int n, int new_elem) {
     int* helper;
-    helper = malloc(n * sizeof(int));
+    helper = malloc((n + 1) * sizeof(int));
 
     if (helper == NULL) {
         return NULL;
@@ -33,29 +33,22 @@ int* add(int* tab, int n, int new_elem) {
     for(int i = 0; i < n; i++) {
         helper[i] = tab[i];
     }
+    helper[n] = new_elem;
 
     free(tab);
 
-    tab = malloc((n + 1) * sizeof(int));
-
-    if (tab == NULL) {
-        return NULL;
-    }
-
-    for(int i = 0; i < n; i++) {
-        tab[i] = helper[i];
-    }
-    tab[n] = new_elem;
-
-    free(helper);
-
-    return tab;
+    return helper;
 }
 
 int main() {
     int* tab = NULL;
 
     for (int i = 0; i < 10; i++) {
+        // tutaj można ew. dać scanf i sczytywać co użytkownik chce,
+        // żeby się znajdowało w tablicy, ale skoro warunki zadania
+        // tego nie wymagają, nie implementowałem takiej funkcjonalności
+        // tylko dodaję wartość o 10 większą od pozycji w tablicy.
+
         tab = add(tab, i, i + 10);
 
         if (tab == NULL) {
