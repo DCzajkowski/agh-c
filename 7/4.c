@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-int f(char *text, int length) {
+int f(char* text, int length) {
     if (length == 0 || length == 1) {
         return 1;
     }
@@ -19,7 +19,7 @@ int f(char *text, int length) {
 
 int main() {
     int length = 15;
-    char *text = "kobylamamalybok";
+    char* text = "kobylamamalybok";
 
     if (f(text, length)) {
         printf("Podany tekst jest palindromem.\n");
