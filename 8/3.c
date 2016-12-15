@@ -5,7 +5,7 @@
  * poprzez zmniejszenie rozmiaru tablicy zawierającej napis - funkcja przydziela
  * dokładnie tyle pamięci, ile potrzebuje nowy napis i zwalnia pamięć przydzieloną
  * staremu (oczywiście po uprzednim przepisaniu napisu ze starej tablicy do nowej
- * wraz ze znakiem końca napisu).  Na koniec pod adres pstr należy "wrzucić" na
+ * wraz ze znakiem końca napisu). Na koniec pod adres pstr należy "wrzucić" na
  * nową tablicę. Funkcja ma zwracać usuwany znak.
  *
  * Po każdym usunięciu kolejnego znaku program (main) ma wypisać napis. W pisanej
@@ -25,3 +25,54 @@
  *         wskaźników i wyłuskujemy to, na co wskazuje jej i-ty element).
  *
  */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+char deleteFirstChar(char** pointer) {
+    int size = 0;
+    char removal = (*pointer)[0];
+
+    while ((*pointer)[size] != '\0' && (*pointer)[size] != '\n' ) {
+        size++;
+    }
+
+    char* helper = malloc((size - 1) * sizeof(char));
+
+    if (helper == NULL) {
+        return '\0';
+    }
+
+    for (int i = 0; i < (size - 1); i++) {
+        helper[i] = (*pointer)[i + 1];
+    }
+    helper[size - 1] = '\0';
+
+    free(*pointer);
+    *pointer = helper;
+
+    return removal;
+}
+
+int main() {
+    char* text = malloc(100 * sizeof(char));
+
+    if (text == NULL) {
+        printf("Wystąpił problem podczas alokowania pamięci.\n");
+        return 0;
+    }
+
+    fgets(text, 100, stdin);
+
+    char new_text = deleteFirstChar(&text);
+
+    if (new_text == '\0') {
+        printf("Wystąpił problem podczas alokowania pamięci.\n");
+        return 0;
+    }
+
+    printf("Usunięty (zwrócony) znak: %c\n", new_text);
+    printf("Nowy napis: %s\n", text);
+
+    return 0;
+}
