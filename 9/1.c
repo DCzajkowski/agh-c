@@ -1,5 +1,25 @@
 /**
-
+ * Napisz program zawierający następujące funkcje:
+ *     int** createMatrix(int n);
+ *         która tworzy macierz o wymiarze nxn. Fukcja zwraca utworzoną tablicę.
+ *         W funkcji każdy wiersz ma być alokowany osobno. W funkcji należy użyć funkcji deleteMatrix().
+ *
+ *     void fillMatrix(int** tab, int n);
+ *         która otrzymuje macierz tab o wymiarze ''nxn'', a następnie wypełnia ją kolejnymi
+ *         liczbami naturalnymi począwszy od 1.
+ *
+ *     void copyMatrix(int*** pdest, int** src, int n);
+ *         która tworzy tablicę 'dest ', kopiuje do niej zawartość tablicy ''src'' i "wrzuca"
+ *         "dest" pod przekazany adres. Obie tablice są wymiaru ''nxn''.
+ *         W funkcji należy użyć funkcji CreateMatrix().
+ *
+ *     void deleteMatrix(int*** ptab, int n);
+ *         która otrzymuje poprzez adres macierz o wymiarze ''nxn'' utworzoną przez createMatrix()
+ *         i następnie zwalnia zajmowaną przez macierz pamięć, a wskaźnik reprezentujący tablicę ustawia na NULL.
+ *
+ * W programie należy użyć wszystkich wymienionych powyżej funkcji do utworzenia tablicy o
+ * wymyslonym rozmiarze, wypełnienia jej, skopiowania do drugiej tablicy, wypisania drugiej
+ * tablicy i zwolnienia całej przydzielonej pamięci
  */
 
 #include <stdio.h>
