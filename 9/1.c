@@ -36,22 +36,32 @@ int** createMatrix(int n) {
     }
 
     // tab[i][j] = *(*(tab+i)+j)
-    for (int i = 0; i <  n; i++) {
-        for (int j = 0; j < n; j++) {
-            tab[i][j] = 0;
-        }
-    }
+    // for (int i = 0; i <  n; i++) {
+    //     for (int j = 0; j < n; j++) {
+    //         tab[i][j] = 0;
+    //     }
+    // }
 
     return tab;
 }
 
-// void fillMatrix(int** tab, int n);
+void fillMatrix(int** tab, int n) {
+    int number = 1;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            tab[i][j] = number++;
+        }
+    }
+}
+
 // void copyMatrix(int*** pdest, int** src, int n);
 
 int main() {
     int n = 10;
     int** matrix = createMatrix(n);
 
+    fillMatrix(matrix, n);
+
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             printf("%2d ", matrix[i][j]);
@@ -59,15 +69,7 @@ int main() {
         printf("\n");
     }
 
-    printf("-----\n");
     deleteMatrix(&matrix, n);
-
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            printf("%2d ", matrix[i][j]);
-        }
-        printf("\n");
-    }
 
     return 0;
 }
