@@ -1,18 +1,4 @@
 /**
- * Napisz program zawierający następujące funkcje:
- *     void fillMatrix(int** tab, int n);
- *         która otrzymuje macierz tab o wymiarze "nxn", a następnie wypełnia ją kolejnymi
- *         liczbami naturalnymi począwszy od 1.
- *
- *     void copyMatrix(int*** pdest, int** src, int n);
- *         która tworzy tablicę "dest", kopiuje do niej zawartość tablicy "src" i "wrzuca"
- *         "dest" pod przekazany adres. Obie tablice są wymiaru "nxn".
- *         W funkcji należy użyć funkcji CreateMatrix().
- *
- * W programie należy użyć wszystkich wymienionych powyżej funkcji do utworzenia tablicy o
- * wymyslonym rozmiarze, wypełnienia jej, skopiowania do drugiej tablicy, wypisania drugiej
- * tablicy i zwolnienia całej przydzielonej pamięci
- *
  * Sprawdź wszystkie malloc'i i zwolnij pamięć jeśli wystąpił problem
  */
 
@@ -35,13 +21,6 @@ int** createMatrix(int n) {
         tab[i] = malloc(n * sizeof(int));
     }
 
-    // tab[i][j] = *(*(tab+i)+j)
-    // for (int i = 0; i <  n; i++) {
-    //     for (int j = 0; j < n; j++) {
-    //         tab[i][j] = 0;
-    //     }
-    // }
-
     return tab;
 }
 
@@ -54,7 +33,17 @@ void fillMatrix(int** tab, int n) {
     }
 }
 
-// void copyMatrix(int*** pdest, int** src, int n);
+void copyMatrix(int*** pdest, int** src, int n) {
+    int** dest = createMatrix(n);
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            dest[i][j] = src[i][j];
+        }
+    }
+
+    *pdest = dest;
+}
 
 int main() {
     int n = 10;
@@ -69,7 +58,20 @@ int main() {
         printf("\n");
     }
 
+    printf("\n---\n\n");
+
+    int** new_matrix;
+    copyMatrix(&new_matrix, matrix, n);
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%2d ", new_matrix[i][j]);
+        }
+        printf("\n");
+    }
+
     deleteMatrix(&matrix, n);
+    deleteMatrix(&new_matrix, n);
 
     return 0;
 }
