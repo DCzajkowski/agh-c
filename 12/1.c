@@ -179,7 +179,7 @@ int main() {
             break;
         }
 
-        printf("\n\nNaciśnij dowolny klawisz aby kontynuować...\n"); getchar(); getchar();
+        printf("\n\nNaciśnij Enter aby kontynuować...\n"); getchar(); getchar();
     }
 
     return 0;
