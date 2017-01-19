@@ -124,6 +124,24 @@ void close() {
     printf("Wystąpił problem.");
 }
 
+void clear(struct Element** head) {
+    if (head == NULL) return;
+    if (*head == NULL) return;
+
+    struct Element * remove1 = *head;
+    struct Element * remove2 = (*head)->next;
+
+    while (1) {
+        free(remove1);
+        if (remove2 == NULL) break;
+
+        remove1 = remove2;
+        remove2 = remove2->next;
+    }
+
+    *head = NULL;
+}
+
 int main() {
     struct Element *head = NULL;
     int choice;
@@ -156,6 +174,7 @@ int main() {
         } else if (choice == 5) {
             head = remove_first(head);
         } else if (choice == 0) {
+            clear(&head);
             clear_screen();
             break;
         }
