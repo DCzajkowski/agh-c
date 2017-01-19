@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
 #define SIZE 255
 
 struct Person {
@@ -95,6 +96,12 @@ struct Element * search(struct Element* head, int year) {
     return found;
 }
 
+void remove_first(struct Element** head) {
+    *head = (*head)->next;
+
+    printf("Usunięto pomyślnie!\n");
+}
+
 void clear_screen() {
     printf("\033[H\033[J");
 }
@@ -145,7 +152,7 @@ int main() {
         } else if (choice == 4) {
             printf("|add in different place|");
         } else if (choice == 5) {
-            printf("|remove the first element|");
+            remove_first(&head);
         } else if (choice == 0) {
             clear_screen();
             break;
