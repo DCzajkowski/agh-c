@@ -97,11 +97,14 @@ struct Element * search(struct Element* head, int year) {
 }
 
 struct Element * remove_first(struct Element* head) {
-    head = head->next;
+    if (head == NULL) return NULL;
+
+    struct Element * next = head->next;
+    free(head);
 
     printf("Usunięto pomyślnie!\n");
 
-    return head;
+    return next;
 }
 
 void clear_screen() {
