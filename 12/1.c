@@ -66,13 +66,13 @@ void all(struct List* head) {
     }
 }
 
-void search(struct List* head, int year) {
+struct List * search(struct List* head, int year) {
     struct List *element = head;
     struct List *found = NULL;
 
     if (element == NULL) {
         printf("Nie ma żadnych elementów w tablicy.\n");
-        return;
+        return NULL;
     }
 
     for (; element != NULL; element = element->next) {
