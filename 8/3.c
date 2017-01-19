@@ -1,4 +1,12 @@
 /**
+ * UWAGA! To zadanie zostało oceninone na db z komentarzem:
+ *     char* helper = malloc((size - 1) * sizeof(char)); za mało o 1znak
+ *     100 nienazwana stała
+ *     char new_text = deleteFirstChar(&text);- brak sprawdzenia wyniku działania funkcji
+ *     brak zwolnienia pamięci w main
+ */
+
+/**
  * Napisz funkcję
  *     char deleteFirstChar(char** pstr)
  * która wylicza długość napisu wskazanego przez pstr i usuwa z niego pierwszy znak

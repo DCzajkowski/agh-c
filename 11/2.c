@@ -1,4 +1,8 @@
 /**
+ * UWAGA! Program nie skończony z powodu braku chęci.
+ */
+
+/**
  * Przy pomocy struktur zaimplementować prostą 'bazę danych', przechowywaną  w pamięci komputera
  * w postaci tablicy struktur. 'Baza danych' ma stanowić prostą książkę telefoniczną
  * (Imię, Nazwisko jako napisy, Numer telefonu jako liczba typu long). Program musi pozwalać
@@ -15,42 +19,84 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#define SIZE 30
+#include <string.h>
 
-struct Phone {
-    char first_name[SIZE];
-    char last_name[SIZE];
+struct Contact {
+    char* first_name;
+    char* last_name;
     long number;
 };
+typedef struct Contact Contact;
 
-struct PhoneBook {
-    int size;
-    Phone* = phones;
-};
-
-// dodanie
-// usunięcie
-// przeglądanie wpisów
-
-void print_number(struct Phone phone) {
-    printf("%s \t\t%s \t\t%ld\n", phone.first_name, phone.last_name, phone.number);
+void print_contact(Contact* book, int id) {
+    printf("%d \t%s \t%s \t%ld\n", id, (book[id]).first_name, (book[id]).last_name, (book[id]).number);
 }
 
-void print_book(struct PhoneBook book) {
-    for (int i = 0; i <= book.size; i++) {
-        printf("%s \t\t%s \t\t%ld\n", book[i].first_name, book[i].last_name, book[i].number);
-    }
+void clear_screen() {
+    printf("\033[H\033[J");
 }
+
+void print_homescreen() {
+    clear_screen();
+    printf("Wpisz polecenie:");
+    printf("\nadd - Dodaj kontakt do książki telefonicznej");
+    printf("\nall - Wyświetl całą książkę telefoniczną");
+    printf("\nsearch - Szukaj kontaktu po numerze telefonu");
+    printf("\nshow - Wyświetl numer telefonu na podstawie id");
+    printf("\nremove - Usuń kontakt na podstawie id");
+    printf("\nexit - Zakończ program\n");
+}
+
+// int add(PhoneBook **book, int size, Phone phone) {
+
+// }
+
+// int remove(PhoneBook **book, int size, int id) {
+
+// }
+
+// int search(PhoneBook *book, int size, long number) {
+
+// }
+
 
 int main() {
-    struct PhoneBook book;
+    Contact* book = NULL;
+    char* command;
+    int next;
+    int size = 0;
 
-    book[0].first_name = "John";
-    book[0].last_name = "Doe";
-    book[0].number = 505555555;
+    while (1) {
+        print_homescreen();
+        putchar('>');
+        putchar(' ');
+        scanf("%s", command);
 
-    printf("First Name \tLast Name \tPhone Number\n--------------------------------------------\n");
-    print_phone3(book);
+        if (strcmp(command, "add") == 0) {
+            printf("|add|");
+        } else if (strcmp(command, "all") == 0) {
+            if (book == NULL || size == 0) {
+                printf("Nie ma żadnych numerów telefonu\n");
+                continue;
+            }
+
+            // printf("ID \tImię \tNazwisko \tNumer telefonu\n--------------------------------------------\n");
+            // for (int i = 0; i <= size; i++) {
+            //     print_contact(book, i);
+            // }
+        } else if (strcmp(command, "search") == 0) {
+            printf("|search|");
+        } else if (strcmp(command, "show") == 0) {
+            printf("|show|");
+        } else if (strcmp(command, "remove") == 0) {
+            printf("|remove|");
+        } else if (strcmp(command, "exit") == 0) {
+            clear_screen();
+            break;
+        }
+
+        printf("\n"); getchar(); getchar();
+    }
 
     return 0;
 }

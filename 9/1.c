@@ -1,4 +1,10 @@
 /**
+ * UWAGA! To zadanie zostało oceninone na db+ z komentarzem:
+ *     if (tab[i] == NULL) return NULL; - brak 'posprzątania'
+ *     int** dest = createMatrix(n); - warto jeszcze dodać *ptab=NULL ...
+ */
+
+/**
  * Napisz program zawierający następujące funkcje:
  *     int** createMatrix(int n);
  *         która tworzy macierz o wymiarze nxn. Fukcja zwraca utworzoną tablicę.
