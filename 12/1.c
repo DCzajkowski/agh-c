@@ -96,10 +96,12 @@ struct Element * search(struct Element* head, int year) {
     return found;
 }
 
-void remove_first(struct Element** head) {
-    *head = (*head)->next;
+struct Element * remove_first(struct Element* head) {
+    head = head->next;
 
     printf("Usunięto pomyślnie!\n");
+
+    return head;
 }
 
 void clear_screen() {
@@ -152,7 +154,7 @@ int main() {
         } else if (choice == 4) {
             printf("|add in different place|");
         } else if (choice == 5) {
-            remove_first(&head);
+            head = remove_first(head);
         } else if (choice == 0) {
             clear_screen();
             break;
