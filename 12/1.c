@@ -24,6 +24,7 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #define SIZE 255
 
@@ -33,13 +34,22 @@ struct Person {
     int year;
 };
 
-struct List {
+struct Element {
     struct Person person;
-    struct List* next;
+    struct Element* next;
 };
 
-void add(struct List** head) {
-    struct List* element = malloc(sizeof(*element));
+void attach(struct Element** head, char* first_name, char* last_name, int year) {
+    struct Element* element = malloc(sizeof(*element));
+    strcpy(element->person.first_name, first_name);
+    strcpy(element->person.last_name, last_name);
+    element->person.year = year;
+    element->next = *head;
+    *head = element;
+}
+
+void add(struct Element** head) {
+    struct Element* element = malloc(sizeof(*element));
 
     if (element != NULL) {
         printf("Podaj imię, nazwisko i rok urodzenia oddzielone spacjami:\n");
@@ -48,13 +58,14 @@ void add(struct List** head) {
         element->next = *head;
 
         *head = element;
+        printf("\nDodano element.\n");
     } else {
         printf("Wystąpił problem podczas alokowania pamięci.\n");
     }
 }
 
-void all(struct List* head) {
-    struct List *element = head;
+void all(struct Element* head) {
+    struct Element *element = head;
 
     if (element == NULL) {
         printf("Nie ma żadnych elementów w tablicy.\n");
@@ -66,9 +77,9 @@ void all(struct List* head) {
     }
 }
 
-struct List * search(struct List* head, int year) {
-    struct List *element = head;
-    struct List *found = NULL;
+struct Element * search(struct Element* head, int year) {
+    struct Element *element = head;
+    struct Element *found = NULL;
 
     if (element == NULL) {
         printf("Nie ma żadnych elementów w tablicy.\n");
@@ -77,23 +88,71 @@ struct List * search(struct List* head, int year) {
 
     for (; element != NULL; element = element->next) {
         if (element->person.year == year) {
-            add(&found);
+            attach(&found, element->person.first_name, element->person.last_name, element->person.year);
         }
     }
 
     return found;
 }
 
+void clear_screen() {
+    printf("\033[H\033[J");
+}
+
+void print_homescreen() {
+    clear_screen();
+    printf("Wpisz polecenie:");
+    printf("\n1 - Wyświetl całą listę");
+    printf("\n2 - Dodaj nowy element");
+    printf("\n3 - Wyszukaj elementy na podstawie roku urodzenia");
+    printf("\n4 - Dodaj element w dowolnym miejscu listy");
+    printf("\n5 - Usuń element z początku listy");
+    printf("\n0 - Zakończ program\n");
+}
+
+void close() {
+    clear_screen();
+    printf("Wystąpił problem.");
+}
+
 int main() {
-    struct List *head = NULL;
+    struct Element *head = NULL;
+    int choice;
 
-    add(&head);
+    while (1) {
+        print_homescreen();
+        putchar('>');
+        putchar(' ');
+        scanf("%d", &choice);
+        printf("\n");
 
-    if (head == NULL) {
-        return 0;
+        if (choice == 1) {
+            all(head);
+        } else if (choice == 2) {
+            add(&head);
+
+            if (head == NULL) { close(); return 0; }
+        } else if (choice == 3) {
+            int year;
+            printf("Podaj rok urodzenia po którym chcesz wyszukać rekordy:\n");
+            putchar('>');
+            putchar(' ');
+            scanf("%d", &year);
+            struct Element * found = search(head, year);
+            for (; found != NULL; found = found->next) {
+                printf("%s %s %d\n", found->person.first_name, found->person.last_name, found->person.year);
+            }
+        } else if (choice == 4) {
+            printf("|add in different place|");
+        } else if (choice == 5) {
+            printf("|remove the first element|");
+        } else if (choice == 0) {
+            clear_screen();
+            break;
+        }
+
+        printf("\n\nNaciśnij dowolny klawisz aby kontynuować...\n"); getchar(); getchar();
     }
-
-    all(head);
 
     return 0;
 }
